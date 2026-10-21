@@ -1,75 +1,81 @@
 # Advanced Todo React
 
-Task list application developed with React and Vite, focused on organization and productivity.
-
-## Technologies used
-
-- React 19
-- Vite
-- JavaScript
-- CSS
-- Tailwind CSS
+A task management app built with React and Vite. Add tasks with descriptions, track completion, and filter the list by status.
 
 ## Features
 
-- Add tasks
-- Mark tasks as completed
-- Remove items from the list
-- Simple and responsive interface
+- Create tasks with a required title and description
+- Mark tasks as complete and undo completion
+- Delete tasks
+- Filter the list to show all, completed, or pending tasks
+- Share task and filter state across components with React Context
+- Responsive styling with Tailwind CSS
+
+Tasks are stored in React state and are cleared when the page is reloaded.
+
+## Tech stack
+
+- React 19
+- Vite 8
+- JavaScript (ES modules)
+- Tailwind CSS 4
+- ESLint
 
 ## Prerequisites
 
-Before starting, make sure you have installed:
-
-- Node.js (version 18 or higher)
+- Node.js 20.19+ or 22.12+
 - npm
 
-## Run locally
+## Getting started
 
-1. Open the terminal in the project root
-2. Install the dependencies:
+From the project root, install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start the development server:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-4. Open the app in your browser using the URL displayed in the terminal, usually:
+Open the local URL printed in the terminal (usually `http://localhost:5173`).
 
-```bash
-http://localhost:5173
-```
+## Available scripts
 
-## Production build
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the Vite development server    |
+| `npm run build`   | Create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint                           |
 
-To generate the optimized production version:
+## How it works
 
-```bash
-npm run build
-```
-
-The output will be generated in the `dist` folder.
+`TodoProvider` wraps the app and holds the task list and current filter in context. The `useTodos` hook gives components access to that shared state and its actions. `TodoForm` uses the `useInput` hook to manage the title and description fields; submitting creates a task with a unique ID and an incomplete status. `TodoFilters` selects which tasks are displayed, while `TodoList` renders each task using `TodoItem`.
 
 ## Project structure
 
-```bash
+```text
 src/
   components/
+    TodoFilters.jsx
+    TodoForm.jsx
+    TodoItem.jsx
+    TodoList.jsx
+  context/
+    TodoContext.jsx
   hooks/
+    useInput.jsx
+    useTodos.jsx
   style/
+    style.css
   App.jsx
   main.jsx
+index.html
+vite.config.js
 ```
-
-## Notes
-
-This project was created as an example of a TODO app in React with a modern setup using Vite.
-Early Build
 
 ## Author
 
