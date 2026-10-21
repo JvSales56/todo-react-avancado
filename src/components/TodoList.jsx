@@ -9,7 +9,7 @@ function TodoList() {
   }
 
   return (
-    <ul className="w-full max-w-md">
+    <ul className="w-full max-w-md gap-4">
       {filteredTasks.map((task) => (
         <TodoItem key={task.id} {...task} />
       ))}
