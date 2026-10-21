@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { userInput } from "../hooks/userInput";
+import { useInput } from "../hooks/useInput.jsx";
+import { useTodos } from "../hooks/useTodos.jsx";
 
-function TodoForm({ addTask }) {
-  const name = userInput("");
-  const description = userInput("");
+function TodoForm() {
+  const title = useInput("");
+  const description = useInput("");
+
+  const { addTask } = useTodos();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name.value.trim() || !description.value.trim()) {
+    if (!title.value.trim() || !description.value.trim()) {
       return;
     }
 
-    const newTask = {
+    addTask({
       id: crypto.randomUUID(),
-      name: name.value,
-      description: description.value,
+      title: title.value.trim(),
+      description: description.value.trim(),
       completed: false,
-    };
+    });
 
-    addTask(newTask);
-
-    name.clearInput();
+    title.clearInput();
     description.clearInput();
   };
 
@@ -30,14 +30,15 @@ function TodoForm({ addTask }) {
       <input
         type="text"
         placeholder="Task name"
-        value={name.value}
-        onChange={name.onChange}
+        value={title.value}
+        onChange={title.onChange}
+        required
       />
-      <input
-        type="text"
+      <textarea
         placeholder="Add a new task description"
         value={description.value}
         onChange={description.onChange}
+        required
       />
       <button type="submit">Add Task</button>
     </form>
